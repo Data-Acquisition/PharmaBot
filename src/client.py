@@ -2,21 +2,20 @@ import requests
 import json
 from collections import namedtuple
 
-url = 'https://api-test.maxma.com/'
+
 secret_key = "f8634ce0-5ca2-4b99-a371-110383cb3ecf"
-headers = {
-  'Accept': 'application/json',
-  'Content-Type': 'application/json',
-  'Cache-Control': 'no-cache',
-  'X-Processing-Key': secret_key
-}
-phone = '+79774583897'
+phone = '+79774583899'
 
 class Maxma():
-  def __init__(self, url, secret_key, headers, phone):
-    self.url = url
+  def __init__(self, secret_key, phone):
+    self.url = 'https://api-test.maxma.com/'
     self.secret_key = secret_key
-    self.headers = headers
+    self.headers = {
+      'Accept': 'application/json',
+      'Content-Type': 'application/json',
+      'Cache-Control': 'no-cache',
+      'X-Processing-Key': self.secret_key
+    }
     self.phone = phone
 
   def to_dto(self, responce):
@@ -78,10 +77,10 @@ class Maxma():
     respDTO = self.to_dto(r)
     return respDTO
 
-personOne = Maxma(url, secret_key, headers, phone)
+personOne = Maxma(secret_key, phone)
 
 print(personOne.get_balance())
 # print(class1.add_new_client('+79774583895' ,'chetv@mail.ru', 'Mik CHetv', 1,
 #                      '1998-11-21T00:00:00+04:00', '2222235'))
 print(personOne.send_code())
-# print(class1.change_balance(50))
+# print(personOne.change_balance(50))
