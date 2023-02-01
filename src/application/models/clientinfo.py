@@ -9,4 +9,3 @@ class ClientInfo(db.Model):
     sex = db.Column(db.Integer)
     birthDate = db.Column(db.Date)
     password = db.Column(db.String(255), nullable=False)
-    pollResult = db.Column(db.Unicode(128))
