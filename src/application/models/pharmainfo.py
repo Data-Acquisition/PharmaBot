@@ -8,3 +8,4 @@ class PharmaInfo(db.Model):
     weekendTime = db.Column(db.Time)
     geo = db.Column(db.Unicode(64))
     phone = db.Column(db.Integer)
+    photo = db.Column(db.Unicode(128))
