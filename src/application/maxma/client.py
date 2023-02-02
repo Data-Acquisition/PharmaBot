@@ -77,7 +77,7 @@ class Maxma():
     respDTO = self.to_dto(r)
     return respDTO
 
-personOne = Maxma(secret_key, phone)
+# personOne = Maxma(secret_key, phone)
 
 # print(personOne.get_balance())
 # print(personOne.add_new_client('+79774583822' ,'chetv@mail.ru', 'Mik CHetv', 1,

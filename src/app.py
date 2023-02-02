@@ -1,7 +1,7 @@
 #!venv/bin/python
 import os
 from flask_security.utils import encrypt_password
-from application import app, db, PharmaInfo, ClientInfo
+from application import app, db, PharmaInfo
   # Role, user_datastore
 
 
@@ -16,12 +16,14 @@ def build_sample_db():
     db.drop_all()
     db.create_all()
 
-    # with app.app_context():
-    #     user_role = PharmaInfo(name='1111111111111111111111111111111111111111111111111111111111111111111111')
-    #     super_user_role = PharmaInfo(name='superuser')
-    #     db.session.add(user_role)
-    #     db.session.add(super_user_role)
-    #     db.session.commit()
+    with app.app_context():
+      user_role = PharmaInfo(name='11111111', address='улица Пушкина')
+      super_user_role = PharmaInfo(name='superuser')
+      db.session.add(user_role)
+      db.session.add(super_user_role)
+      db.session.commit()
+        # db.session.delete(user_role)
+        # db.session.commit()
     
     #     test_user = user_datastore.create_user(
     #         first_name='Admin',
@@ -32,16 +34,16 @@ def build_sample_db():
 
 
     #     db.session.commit()
-    return
+    # return
 
 
 if __name__ == '__main__':
     app.app_context().push()
     # Build a sample db on the fly, if one does not exist yet.
     app_dir = os.path.realpath(os.path.dirname(__file__))
-    database_path = os.path.join(app_dir, app.config['DATABASE_FILE'])
-    if not os.path.exists(database_path):
-        build_sample_db()
+    # database_path = os.path.join(app_dir, app.config['DATABASE_FILE'])
+    # if not os.path.exists(database_path):
+    build_sample_db()
 
     # Start app
     app.run(host='0.0.0.0', debug=True)

@@ -1,7 +1,9 @@
 from application.models import db
+from application.models.basemodel import MyModel
 
-class ClientInfo(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+class User(db.Model, MyModel):
+    __tablename__ = 'users'
+    # id = db.Column(db.Integer, primary_key=True)
     phone = db.Column(db.Integer, nullable=False)
     last_name = db.Column(db.String(255))
     first_name = db.Column(db.String(255), nullable=False)
