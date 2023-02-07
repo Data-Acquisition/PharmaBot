@@ -14,8 +14,8 @@ bot = telebot.TeleBot(API_TOKEN)
 
 def web_app_keyboard():
     keyboard = types.ReplyKeyboardMarkup(row_width=1, resize_keyboard=True)
-    web_app_test = types.WebAppInfo(
-        "https://yandex.ru/maps/org/238736570145")
+    web_app_test = types.WebAppInfo('https://17cf-176-52-19-144.eu.ngrok.io')
+        # "https://yandex.ru/maps/org/238736570145")
     one_butt = types.KeyboardButton(
         text="Войти", web_app=web_app_test)
     keyboard.add(one_butt)

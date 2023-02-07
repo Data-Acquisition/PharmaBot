@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!-- <!DOCTYPE html>
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
@@ -13,4 +13,12 @@
 	</script>
 	<script src="static/js/script.js"></script>
 </body>
-</html>
+</html> -->
+
+{% extends "base.html" %} {% block title %}Map{% endblock %} {% block content %}
+  <link rel="stylesheet" href="static/css/style.css">
+  <div id="map-test" class="map"></div>
+	<script src="https://api-maps.yandex.ru/2.1/?apikey=ваш API-ключ&lang=ru_RU">
+	</script>
+	<script src="static/js/script.js"></script>
+  {% endblock %}

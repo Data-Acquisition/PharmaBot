@@ -3,6 +3,7 @@ from application.models.user import User
 from werkzeug.security import generate_password_hash, check_password_hash
 from application.models import db  ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
+from application.maxma import Maxma
 
 
 auth = Blueprint('auth', __name__)
@@ -15,15 +16,16 @@ def login():
         password = request.form.get('password')
 
         user = User.query.filter_by(phone=phone).first()
-        if user:
+        person = Maxma(phone)
+        if user and person.get_balance():
             if check_password_hash(user.password, password):
-                flash('Logged in successfully!', category='success')
+                flash(f'Logged in successfully! {person.get_balance().client.bonuses}', category='success')
                 login_user(user, remember=True)
-                return redirect(url_for('index'))
+                return redirect(url_for('views.map'))
             else:
-                flash('Incorrect password, try again.', category='error')
+                flash(f'Incorrect password, try again.', category='error')
         else:
-            flash('phone does not exist.', category='error')
+            flash(f'phone does not exist.', category='error')
 
     return render_template("login.html", user=current_user)
 
@@ -61,6 +63,6 @@ def sign_up():
             db.session.commit()
             login_user(new_user, remember=True)
             flash('Account created!', category='success')
-            return redirect(url_for('index'))
+            return redirect(url_for('views.map'))
 
     return render_template("sign_up.html", user=current_user)

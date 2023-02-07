@@ -7,9 +7,9 @@ from collections import namedtuple
 # phone = '+79774583897'
 
 class Maxma():
-  def __init__(self, secret_key, phone):
+  def __init__(self, phone):
     self.url = 'https://api-test.maxma.com/'
-    self.secret_key = secret_key
+    self.secret_key = 'f8634ce0-5ca2-4b99-a371-110383cb3ecf'
     self.headers = {
       'Accept': 'application/json',
       'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ class Maxma():
     r = requests.post(url=url,headers=self.headers, json=data)
     respDTO = self.to_dto(r)
     try:
-      return respDTO.bonuses[0].amount
+      return respDTO
     except IndexError:
       return 0
 

@@ -15,8 +15,12 @@ db = SQLAlchemy(app)
 from application.models import *
 from application.maxma import *
 from application.views.auth import auth
+from application.views.views import views
+
+
 
 app.register_blueprint(auth, url_prefix='/')
+app.register_blueprint(views, url_prefix='/')
 
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login'
@@ -26,24 +30,25 @@ login_manager.init_app(app)
 def load_user(id):
   return User.query.get(int(id))
 
-@app.route('/')
-@login_required
-def hello():
-    return render_template('index.html')
+# @app.route('/')
+# @login_required
+# def map():
+#     return render_template('index.html', user=current_user)
 
 
-@app.route('/cardinfo')
-@login_required
-def index():
-  person = Maxma('f8634ce0-5ca2-4b99-a371-110383cb3ecf', '+79774583897')
-  balance = person.get_balance()
-  session.permanent = True
-  if 'visits' in session:
-    session['visits'] = session.get('visits') + 1
-  else:
-    session['visits'] = 1
-    session.modified = True
-  return f"<p>Количесвтво баллов = {balance}, количество посещений {session['visits']}"
+# @app.route('/bonus')
+# @login_required
+# def index():
+#   person = Maxma(current_user.phone)
+#   balance = person.get_balance()
+#   session.permanent = True
+#   if 'visits' in session:
+#     session['visits'] = session.get('visits') + 1
+#   else:
+#     session['visits'] = 1
+#     session.modified = True
+#   # return f"<p>Количесвтво баллов = {balance}, количество посещений {session['visits']}"
+#   return render_template('bonus.html', user=current_user, balance=balance)
 
 # user_datastore = SQLAlchemyUserDatastore(db, User, Role)
 # security = Security(app, user_datastore)

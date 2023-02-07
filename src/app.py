@@ -2,6 +2,7 @@
 import os
 from flask_security.utils import encrypt_password
 from application import app, db, PharmaInfo
+from flask_ngrok import run_with_ngrok
   # Role, user_datastore
 
 
@@ -46,4 +47,5 @@ if __name__ == '__main__':
     # build_sample_db()
 
     # Start app
+    # run_with_ngrok(app)
     app.run(host='0.0.0.0', debug=True)
