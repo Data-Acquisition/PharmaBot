@@ -1,7 +1,0 @@
-{% extends "base.html" %} {% block title %}Map{% endblock %} 
-{% block content %}
-<div class="container">
-  <p>Количество бонусов = {{ balance.client.bonuses }}</p>
-  <p>{{ balance.bonuses[0].expireAt[:10] }} сгорит {{ balance.bonuses[0].amount }} бонусов</p>
-</div>
-{% endblock %}

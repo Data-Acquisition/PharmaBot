@@ -1,0 +1,15 @@
+{% extends "base.html" %} {% block title %}Map{% endblock %} {% block content %}
+<div class="container">
+  <h2>Аптеки</h2>
+  <br>
+  {% for pharma in pharmacies %}
+  <ul>
+    <p>{{ pharma.address }}</p>
+    <p>{{ pharma.week_time }}</p>
+    <p>{{ pharma.weekend_time }}</p>
+    <p>{{ pharma.phone }}</p>
+    <br>
+  </ul>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block title %}Map{% endblock %} {% block content %}
+<div class="container">
+  <h2>Уведомления</h2>
+  <br>
+  {% for note in notes %}
+  <ul>
+    <h4>{{ note.name }}</h4>
+    <p>{{ note.description }}</p>
+    <br>
+  </ul>
+  {% endfor %}
+</div>
+{% endblock %}

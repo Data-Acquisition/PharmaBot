@@ -1,0 +1,13 @@
+{% extends "base.html" %} {% block title %}Map{% endblock %} 
+{% block content %}
+{% if balance.client.bonuses %}
+<div class="container">
+  <br>
+  <p>Номер карты: {{ balance.client.card }}</p>
+  <p>Количество бонусов = {{ balance.client.bonuses }}</p>
+  <p>{{ balance.bonuses[0].expireAt[:10] }} сгорит {{ balance.bonuses[0].amount }} бонусов</p>
+</div>
+{% else %}
+  <p>Количество бонусов = 0</p>
+{% endif %}
+{% endblock %}
