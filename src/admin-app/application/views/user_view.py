@@ -7,6 +7,7 @@ from flask_security.utils import encrypt_password
 
 class UserView(MyModelView):
     list_template = "admin/model/list.html"
+    # column_display_pk = True
     column_searchable_list = ['email', 'first_name', 'last_name']
     column_exclude_list = ['password']
     # form_excluded_columns = column_exclude_list

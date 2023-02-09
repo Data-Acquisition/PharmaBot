@@ -1,0 +1,17 @@
+{% extends "base.html" %} {% block title %}Map{% endblock %} {% block content %}
+<div class="container">
+  <h2>Опросы</h2>
+  <br>
+  {% for poll in polls %}
+  <ul>
+    <p>id {{ poll.id }}</p>
+    <p>Тип {{ poll.type }}</p>
+    <p>Название опроса: {{ poll.name }}</p>
+    <p>Награда в виде бонусов: {{ poll.reward }}</p>
+    <p> {{ poll.name_q }}</p>
+    <a href="/poll{{ poll.id }}">Перейти</a>
+  </ul>
+  <br>
+  {% endfor %}
+</div>
+{% endblock %}

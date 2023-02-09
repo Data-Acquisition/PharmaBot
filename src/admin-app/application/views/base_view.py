@@ -4,7 +4,7 @@ from flask import url_for, redirect, request, abort
 
 
 class MyModelView(sqla.ModelView):
-
+    column_display_pk = True
     def is_accessible(self):
         if not current_user.is_active or not current_user.is_authenticated:
             return False

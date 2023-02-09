@@ -7,6 +7,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from application.maxma import Maxma
 from application.models import db
 import json
+from application.models import *
 
 views = Blueprint('views', __name__)
 
@@ -69,6 +70,18 @@ def settings():
       flash('Телефон успешно изменён!', category='success')
     if password:
       user.password = generate_password_hash(password, method='sha256')
-      db.session.commit()  
+      db.session.commit()
       flash('Пароль успешно изменён!', category='success')
   return render_template('settings/settings.html', user=current_user)
+
+@views.route('/polls', methods=['GET', 'POST'])
+@login_required
+def polls():
+  polls = PollInfo.query.all()
+  return render_template('polls/polls.html', user=current_user, polls=polls)
+
+@views.route('/poll<int:id_poll>', methods=['GET', 'POST'])
+@login_required
+def poll(id_poll):
+  poll = Question.query.filter_by(poll_id=id_poll).all()
+  return render_template('polls/poll.html', user=current_user, poll=poll)

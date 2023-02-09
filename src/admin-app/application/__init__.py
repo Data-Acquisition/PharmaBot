@@ -38,6 +38,10 @@ admin.add_view(UserView(User, db.session, menu_icon_type='fa',
                         menu_icon_value='fa-users', name="Пользователи"))
 admin.add_view(MyModelView(Notify, db.session, name='Уведомления'))
 admin.add_view(MyModelView(PharmaInfo, db.session, name='Аптеки'))
+admin.add_view(MyModelView(PollInfo, db.session, name='Создание опросов'))
+admin.add_view(MyModelView(Question, db.session, name='Создание вопросов к опросам'))
+admin.add_view(MyModelView(Answer, db.session, name='Создание ответов к вопросам'))
+
 # admin.add_view(ResearchView(Research, db.session, menu_icon_type='fa',
 #                             menu_icon_value='fa-connectdevelop',
 #                             name="Исследования и отчёты"))
