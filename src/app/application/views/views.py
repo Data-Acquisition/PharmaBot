@@ -1,4 +1,4 @@
-from flask import Blueprint, render_template, request, flash, jsonify, session
+from flask import Blueprint, render_template, request, flash, jsonify, session, redirect, url_for
 from flask_login import login_required, current_user
 from application.models.user import User
 from application.models.notify import Notify
@@ -63,10 +63,10 @@ def settings():
     user = User.query.filter_by(phone=session['phone']).first()
     if phone:
       client = Maxma(session['phone'])
-      client.update_client(phone) 
+      client.update_client(phone)
       user.phone = phone
       session['phone'] = phone
-      db.session.commit() 
+      db.session.commit()
       flash('Телефон успешно изменён!', category='success')
     if password:
       user.password = generate_password_hash(password, method='sha256')
@@ -84,4 +84,16 @@ def polls():
 @login_required
 def poll(id_poll):
   poll = Question.query.filter_by(poll_id=id_poll).all()
-  return render_template('polls/poll.html', user=current_user, poll=poll)
+  answersList = []
+  for question in poll:
+    answers = Answer.query.filter_by(question_id=question.id).all()
+    answersList.append(answers)
+  if request.method == 'POST':
+    res = []
+    for i in range(1, len(poll) + 1):
+      ques = request.form.get(f'q{i}')
+      answer = request.form[f'answer{i}']
+      res.append({ques: answer})
+    print(res)
+    return redirect(url_for('views.polls'))
+  return render_template('polls/poll.html', user=current_user, poll=poll, answers=answersList)

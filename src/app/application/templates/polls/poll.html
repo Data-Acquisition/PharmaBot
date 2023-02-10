@@ -1,14 +1,25 @@
 {% extends "base.html" %} {% block title %}Map{% endblock %} {% block content %}
 <div class="container">
-
-  {% for q in poll %}
-  <h2>{{q.name_polls}}</h2>
-  <br>
-  <ul>
-    <p>id {{ q.id }}</p>
-    <p>{{ q.name_q }}</p>
-  </ul>
-  <br>
-  {% endfor %}
+  <h2>{{poll[0].name_polls}}</h2>
+  <form method="POST">
+    {% for q in poll %}
+    <div class="form-group">
+      <p>{{ q.name_q }}</p>
+      <select type="answer"
+      class="form-control"
+      id="answer"
+      name="answer{{ loop.index }}">
+        {% for answ in answers%}
+        {% for answer in answ %}
+          {% if answer.question_id == q.id %}
+            <option>{{ answer.answer }}</option>
+          {% endif %}
+        {% endfor %}
+        {% endfor %}
+      </select>
+    </div>
+    {% endfor %}
+    <button type="submit" class="btn btn-primary">Закончить</button>
+  </form>
 </div>
 {% endblock %}
