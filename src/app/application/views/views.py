@@ -21,6 +21,10 @@ def map():
 def bonus():
   person = Maxma(current_user.phone)
   balance = person.get_balance()
+  try:
+    count_expire_bonus = len(balance.bonuses)
+  except:
+    count_expire_bonus = None
   # session.permanent = True
   # if 'visits' in session:
   #   session['visits'] = session.get('visits') + 1
@@ -28,7 +32,8 @@ def bonus():
   #   session['visits'] = 1
   #   session.modified = True
   # return f"<p>Количесвтво баллов = {balance}, количество посещений {session['visits']}"
-  return render_template('bonus.html', user=current_user, balance=balance)
+  return render_template('bonus.html', user=current_user, balance=balance, 
+                         count=count_expire_bonus)
 
 @views.route('/help')
 @login_required
