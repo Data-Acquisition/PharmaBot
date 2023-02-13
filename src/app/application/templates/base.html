@@ -18,30 +18,53 @@
     <title>{% block title %}Home{% endblock %}</title>
   </head>
   <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
-      <button
+    {% if user.is_authenticated %}
+    <div class="content">
+      <button style="color: white; position:fixed; bottom:5%;
+      background: #D82819; margin: 0 30%; height: 50px"
+      class="navbar-toggler"
+      type="button"
+      data-toggle="collapse"
+      data-target="#navbar"
+      >
+        <img src="../static/img/robot-menu.png" style="width: 30%">
+        <span class="">Меню</span>
+      </button>
+    </div>
+    <!-- <img src="../static/img/pharma-icon.png" style="width: 50%"> -->
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      {% else %}
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <div class="navbar-toggler">
+        <button
         class="navbar-toggler"
         type="button"
         data-toggle="collapse"
         data-target="#navbar"
-      >
-        <span class="navbar-toggler-icon"></span>
-      </button>
+        >
+        <span class=""></span>
+          <!-- <img src="../static/img/pharma-icon.png" alt=""> -->
+        </button>
+        <img src="../static/img/pharma-icon.png" style="width: 50%">
+      </div>
+      {% endif %}
       <div class="collapse navbar-collapse" id="navbar">
-        <div class="navbar-nav">
           {% if user.is_authenticated %}
-          <a class="nav-item nav-link" id="home" href="/">Home</a>
-          <a class="nav-item nav-link" id="pharma" href="/pharma">Pharmacies</a>
-          <a class="nav-item nav-link" id="notify" href="/notify">Notify</a>
-          <a class="nav-item nav-link" id="polls" href="/polls">Polls</a>
-          <a class="nav-item nav-link" id="bonus" href="/bonus">Bonus</a>
-          <a class="nav-item nav-link" id="feedback" href="/feedback">Feedback</a>
-          <a class="nav-item nav-link" id="settings" href="/settings">Settings</a>
-          <a class="nav-item nav-link" id="help" href="/help">Help</a>
-          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+          <div class="navbar-nav" style="position: fixed; background-color: white;
+          width: 100%">
+          <a class="nav-item nav-link" id="home" href="/">Карта</a>
+          <a class="nav-item nav-link" id="pharma" href="/pharma">Контакты аптек</a>
+          <a class="nav-item nav-link" id="notify" href="/notify">Уведомления</a>
+          <a class="nav-item nav-link" id="polls" href="/polls">Доступные опросы</a>
+          <a class="nav-item nav-link" id="bonus" href="/bonus">Карта лояльности</a>
+          <a class="nav-item nav-link" id="feedback" href="/feedback">Обратная связь</a>
+          <a class="nav-item nav-link" id="settings" href="/settings">Настройки</a>
+          <a class="nav-item nav-link" id="help" href="/help">Помощь</a>
+          <a class="nav-item nav-link" id="logout" href="/logout">Выйти</a>
           {% else %}
-          <a class="nav-item nav-link" id="login" href="/loginphone">Login</a>
-          <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+          <div class="navbar-nav">
+          <a class="nav-item nav-link" id="login" href="/loginphone">Войти</a>
+          <a class="nav-item nav-link" id="signUp" href="/sign-up">Регистрация</a>
           {% endif %}
         </div>
       </div>
@@ -65,7 +88,7 @@
     </div>
     {% endif %} {% endfor %} {% endif %} {% endwith %}
 
-    <div class="container">{% block content %} {% endblock %}</div>
+    <div class="container">{% block content %}{% endblock %}</div>
     <script
       src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
       integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"

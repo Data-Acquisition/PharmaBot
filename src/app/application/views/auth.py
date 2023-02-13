@@ -31,7 +31,7 @@ def login_password():
     if check_password_hash(user.password, password):
       flash(f'Logged in successfully!', category='success')
       login_user(user, remember=True)
-      return redirect(url_for('views.map'))
+      return redirect(url_for('views.notify'))
     else:
       flash(f'Incorrect password, try again.', category='error')
       
@@ -98,6 +98,6 @@ def sign_up():
             client = Maxma(phone)
             client.add_new_client_short(phone, email, first_name, birthdate)
             flash('Account created!', category='success')
-            return redirect(url_for('views.map'))
+            return redirect(url_for('views.notify'))
 
     return render_template("sign_up.html", user=current_user)

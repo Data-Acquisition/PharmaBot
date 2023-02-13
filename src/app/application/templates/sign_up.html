@@ -1,39 +1,57 @@
 {% extends "base.html" %} {% block title %}Sign Up{% endblock %} {% block
   content %}
-  <form method="POST">
-    <h3 align="center">Sign Up</h3>
+  <form method="POST" style="margin-top: 10vh; margin-bottom: 10vh">
+    <h3 align="center">Регистрация</h3>
     <div class="form-group">
-      <label for="phone">Phone</label>
+      <label for="phone">Телефон</label>
       <input
         type="phone"
         class="form-control"
         id="phone"
         name="phone"
-        placeholder="Enter phone"
+        placeholder="Введите ваш номер"
       />
     </div>
     <div class="form-group">
-      <label for="email">Email</label>
+      <label for="email">Почта</label>
       <input
         type="email"
         class="form-control"
         id="email"
         name="email"
-        placeholder="Enter email"
+        placeholder="Введите почту"
       />
     </div>
     <div class="form-group">
-      <label for="firstName">First Name</label>
+      <label for="firstName">Как вас зовут?</label>
       <input
         type="text"
         class="form-control"
         id="first_name"
         name="first_name"
-        placeholder="Enter first name"
+        placeholder="ФИО"
       />
     </div>
     <div class="form-group">
-      <label for="birthdate">Birthdate</label>
+      <label for="gender">Выберите Ваш пол</label>
+      <br>
+      <div class="form-check form-check-inline">
+        <label class="form-check-label">
+          <input class="form-check-input" type="radio" name="gender" id="male" value="male">
+          <img src="../static/img/male.png" style="width: 23px; height: 35px;">
+          Мужчина
+        </label>
+      </div>
+      <div class="form-check form-check-inline">
+        <label class="form-check-label">
+          <input class="form-check-input" type="radio" name="gender" id="female" value="female">
+          <img src="../static/img/female.png" style="width: 20px; height: 30px;">
+          Женщина
+        </label>
+      </div>
+    </div>
+    <div class="form-group">
+      <label for="birthdate">Дата Вашего рождения</label>
       <input
         type="date"
         class="form-control"
@@ -43,26 +61,35 @@
       />
     </div>
     <div class="form-group">
-      <label for="password1">Password</label>
+      <label for="password1">Пароль</label>
       <input
         type="password"
         class="form-control"
         id="password1"
         name="password1"
-        placeholder="Enter password"
+        placeholder="Введите пароль"
       />
     </div>
     <div class="form-group">
-      <label for="password2">Password (Confirm)</label>
+      <label for="password2">Пароль (Подтверждение)</label>
       <input
         type="password"
         class="form-control"
         id="password2"
         name="password2"
-        placeholder="Confirm password"
+        placeholder="Повторите пароль"
       />
     </div>
+    <div class="form-group">
+      <label class="checkbox-inline">
+        <input type="checkbox" value="">
+        Нажимая на кнопку, вы подтверждаете, что ознакомились с
+        <a href="#">Политикой конфиденциальности</a>
+      </label>
+    </div>
     <br />
-    <button type="submit" class="btn btn-primary">Submit</button>
+    <div align="center">
+    <button type="submit" class="btn btn-primary" style="width: 100%">Зарегистрироваться</button>
+    </div>
   </form>
   {% endblock %}

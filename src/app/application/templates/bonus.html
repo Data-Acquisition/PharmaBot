@@ -1,6 +1,5 @@
 {% extends "base.html" %} {% block title %}Map{% endblock %} 
 {% block content %}
-<div class="container">
   <br>
   <p>{{ balance }}</p>
   {% if balance.client.card %}
@@ -16,5 +15,4 @@
   {% for i in range(count - 1) %}
     <p>{{ balance.bonuses[i].expireAt[:10] }} сгорит {{ balance.bonuses[i].amount }} бонусов</p>
   {% endfor %}
-</div>
 {% endblock %}
