@@ -1,6 +1,8 @@
 from flask import Flask, url_for, render_template, session
 from flask_sqlalchemy import SQLAlchemy
 from flask_login import LoginManager, login_required, current_user
+from flask_cors import CORS, cross_origin
+# from application.configCors import Config
 # from flask_security import Security, SQLAlchemyUserDatastore
 # import flask_admin
 # from flask_admin import helpers as admin_helpers
@@ -9,8 +11,18 @@ from flask_login import LoginManager, login_required, current_user
 
 
 app = Flask(__name__)
+CORS(app, supports_credentials=True)
 app.config.from_pyfile('config.py')
 db = SQLAlchemy(app)
+
+local_config = {
+  "origins": ["https://0349-176-52-25-132.eu.ngrok.io"],
+  "methods": ["OPTIONS", "GET", "POST"]
+}
+
+# cors = CORS(app, supports_credentials=True,resources={
+#   r"/*": local_config
+# })
 
 from application.models import *
 from application.maxma import *
@@ -25,6 +37,7 @@ app.register_blueprint(views, url_prefix='/')
 login_manager = LoginManager()
 login_manager.login_view = 'auth.login_phone'
 login_manager.init_app(app)
+
 
 @login_manager.user_loader
 def load_user(id):

@@ -4,10 +4,12 @@ from werkzeug.security import generate_password_hash, check_password_hash
 from application.models import db  ##means from __init__.py import db
 from flask_login import login_user, login_required, logout_user, current_user
 from application.maxma import Maxma
-
+import json
+from flask_cors import cross_origin
 
 auth = Blueprint('auth', __name__)
 
+@cross_origin
 @auth.route('/loginphone', methods=['GET', 'POST'])
 def login_phone():
   if request.method == 'POST':
@@ -22,6 +24,7 @@ def login_phone():
       
   return render_template("login_phone.html", user=current_user)
 
+@cross_origin
 @auth.route('/loginpassword', methods=['GET', 'POST'])
 def login_password():
   if request.method == 'POST':
@@ -60,6 +63,7 @@ def login_password():
 #     return render_template("login.html", user=current_user)
 
 
+@cross_origin
 @auth.route('/logout')
 @login_required
 def logout():
@@ -67,6 +71,7 @@ def logout():
     return redirect(url_for('auth.login_phone'))
 
 
+@cross_origin
 @auth.route('/sign-up', methods=['GET', 'POST'])
 def sign_up():
     if request.method == 'POST':

@@ -14,27 +14,64 @@
       href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
       crossorigin="anonymous"
     />
-
+    
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
     <title>{% block title %}Home{% endblock %}</title>
   </head>
   <body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-toggle="collapse"
+        data-target="#navbar"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <img src="../static/img/logo.svg" alt="">
+
+      <div class="collapse navbar-collapse" id="navbar">
+        <div class="navbar-nav">
+          {% if user.is_authenticated %}
+          <a class="nav-item nav-link" id="home" href="/map">Карта</a>
+          <a class="nav-item nav-link" id="pharma" href="/pharma">Контакты аптек</a>
+          <a class="nav-item nav-link" id="notify" href="/notify">Уведомления</a>
+          <a class="nav-item nav-link" id="polls" href="/polls">Доступные опросы</a>
+          <a class="nav-item nav-link" id="bonus" href="/bonus">Карта лояльности</a>
+          <a class="nav-item nav-link" id="feedback" href="/feedback">Обратная связь</a>
+          <a class="nav-item nav-link" id="settings" href="/settings">Настройки</a>
+          <a class="nav-item nav-link" id="help" href="/help">Помощь</a>
+          <a class="nav-item nav-link" id="logout" href="/logout">Выйти</a>
+          <!-- <a class="nav-item nav-link" id="home" href="/">Home</a> -->
+          <a class="nav-item nav-link" id="logout" href="/logout">Logout</a>
+          {% else %}
+          <a class="nav-item nav-link" id="login" href="/loginphone">Login</a>
+          <a class="nav-item nav-link" id="signUp" href="/sign-up">Sign Up</a>
+          {% endif %}
+        </div>
+      </div>
+    </nav>
+
+
+    <!-- <iframe src="/loginphone" frameborder="0" style="position: fixed; width:100vw;
+    height: 100vh"></iframe> -->
+    <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
     {% if user.is_authenticated %}
-    <div class="content">
-      <button style="color: white; position:fixed; bottom:5%;
-      background: #D82819; margin: 0 30%; height: 50px"
+    <div class="navbar-toggler">
+      <button style="color: white; position:fixed;
+      background: #D82819; height: 10vh; margin: 85vh 0"
       class="navbar-toggler"
       type="button"
       data-toggle="collapse"
       data-target="#navbar"
       >
-        <img src="../static/img/robot-menu.png" style="width: 30%">
+        <img src="../static/img/robot-menu.png" style="width: 5vh">
         <span class="">Меню</span>
       </button>
-    </div>
+      <img src="../static/img/pharma-icon.png" style="width: 50%">
+    </div> -->
     <!-- <img src="../static/img/pharma-icon.png" style="width: 50%"> -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      {% else %}
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+      <!-- {% else %}
       <div class="navbar-toggler">
         <button
         class="navbar-toggler"
@@ -42,16 +79,16 @@
         data-toggle="collapse"
         data-target="#navbar"
         >
-        <span class=""></span>
+        <span class="navbar-toggler-icon"></span> -->
           <!-- <img src="../static/img/pharma-icon.png" alt=""> -->
-        </button>
+        <!-- </button>
         <img src="../static/img/pharma-icon.png" style="width: 50%">
       </div>
       {% endif %}
       <div class="collapse navbar-collapse" id="navbar">
           {% if user.is_authenticated %}
           <div class="navbar-nav" style="position: fixed; background-color: white;
-          width: 100%">
+          width: 100vh">
           <a class="nav-item nav-link" id="home" href="/">Карта</a>
           <a class="nav-item nav-link" id="pharma" href="/pharma">Контакты аптек</a>
           <a class="nav-item nav-link" id="notify" href="/notify">Уведомления</a>
@@ -61,14 +98,16 @@
           <a class="nav-item nav-link" id="settings" href="/settings">Настройки</a>
           <a class="nav-item nav-link" id="help" href="/help">Помощь</a>
           <a class="nav-item nav-link" id="logout" href="/logout">Выйти</a>
+          </div>
           {% else %}
           <div class="navbar-nav">
           <a class="nav-item nav-link" id="login" href="/loginphone">Войти</a>
           <a class="nav-item nav-link" id="signUp" href="/sign-up">Регистрация</a>
           {% endif %}
-        </div>
+          </div>
       </div>
-    </nav>
+    </nav> -->
+
 
     {% with messages = get_flashed_messages(with_categories=true) %} {% if
     messages %} {% for category, message in messages %} {% if category ==
@@ -104,18 +143,24 @@
       integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
       crossorigin="anonymous"
     ></script>
+    <script>
+      let tg = window.Telegram.WebApp;
+      document.addEventListener("DOMContentLoaded", function(event) {
+          tg.expand();
+       });
+    </script>
+    {% block javascript %}
+        <script type="text/javascript">
+          function deleteNote(noteId) {
+      fetch("/delete-note", {
+        method: "POST",
+        body: JSON.stringify({ noteId: noteId }),
+      }).then((_res) => {
+        window.location.href = "/";
+      });
+      }
+    </script>
+    {% endblock %}
 
-{% block javascript %}
-    <script type="text/javascript">
-      function deleteNote(noteId) {
-  fetch("/delete-note", {
-    method: "POST",
-    body: JSON.stringify({ noteId: noteId }),
-  }).then((_res) => {
-    window.location.href = "/";
-  });
-  }
-</script>
-{% endblock %}
   </body>
 </html>

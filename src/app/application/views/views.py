@@ -11,11 +11,21 @@ from application.models import *
 
 views = Blueprint('views', __name__)
 
-@views.route('/', methods=['GET', 'POST'])
+@views.route('/', methods=['POST'])
+# @login_required
+def maxma():
+    if request.headers['Content-Type'] == 'application/json':
+      my_info = json.dumps(request.json)
+      print()
+      print(my_info)
+    # return render_template('map.html', user=current_user)
+      return my_info
+    
+@views.route('/map', methods=['POST', 'GET'])
 @login_required
 def map():
     return render_template('map.html', user=current_user)
-  
+
 @views.route('/bonus')
 @login_required
 def bonus():
